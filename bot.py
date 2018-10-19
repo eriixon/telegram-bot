@@ -1,11 +1,21 @@
 import os
+import json
 import tornado.ioloop
 import tornado.web
 import telebot
 from telebot import types
 from content import content_list
 
-bot = telebot.TeleBot("662604211:AAEHx4zRD5FS23XuiKIR0i7rM_jS-Jn85Ww")
+
+def get_token():
+    with open('token.json') as data:
+    jdata = json.load(data)
+    return jdata["token"]
+	
+
+token = os.environ.get('TOKEN', get_token())
+bot = telebot.TeleBot(token)
+
 
 def get_keyboard():
     kb = types.InlineKeyboardMarkup()
